@@ -2,6 +2,9 @@
 
 An interactive educational website designed to teach children about space weather through storytelling and quizzes.
 
+https://github.com/user-attachments/assets/d40b3bb0-fdfe-4ecb-a284-7d2b076a0adf
+
+
 ## Overview
 This project introduces space weather concepts to kids using three interactive flipping books. Each book is narrated by a different character:
 - Astronaut
