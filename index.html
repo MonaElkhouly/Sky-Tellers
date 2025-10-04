@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home page</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .quiz-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 60px 0 40px 0;
+    }
+
+    .quiz-btn {
+      background: #4f8cff;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 18px 48px;
+      border: none;
+      border-radius: 32px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+      transition: background 0.2s;
+    }
+    .quiz-btn:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars background -->
+  <div class="stars-background"></div>
+
+  <!-- Hero Section with cover image -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>SkyTellers</h1>
+      <p>Explore space weather through the eyes of heroes—flip, learn, and discover!</p>
+    </div>
+  </section>
+
+  <!-- Section heading -->
+  <div class="section-heading">
+    <h2>Explore More</h2>
+    <div class="line"></div>
+  </div>
+
+  <!-- Cards container -->
+  <section class="cards">
+    <!-- Card 1 -->
+    <a href="book1/turn.js-master/demos/magazine/index.html" class="card">
+      <img src="aurora2.jpg" alt="Aurora" class="card-image">
+      <div class="card-overlay">
+        <h3 class="card-title">Aurora</h3>
+        <p class="card-description">A natural light display caused by space weather activity.</p>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="book2/turn.js-master/demos/magazine/index.html" class="card">
+      <img src="solar_flare.jpg" alt="Solar Flare" class="card-image">
+      <div class="card-overlay">
+        <h3 class="card-title">Solar Flare</h3>
+        <p class="card-description">Massive bursts of energy released from the Sun.</p>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="book3/turn.js-master/demos/magazine/index.html" class="card">
+      <img src="cme.jpg" alt="CME" class="card-image">
+      <div class="card-overlay">
+        <h3 class="card-title">Polar Lights</h3>
+        <p class="card-description">Vivid curtains of light in the polar regions.</p>
+      </div>
+    </a>
+  </section>
+
+  <!-- Quiz Section -->
+  <section class="quiz-section">
+    <button class="quiz-btn" onclick="window.location.href='quiz/index.html'">Let's Play</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

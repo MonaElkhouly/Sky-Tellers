@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Quiz with Rocket</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Lottie Web for Rocket Animation -->
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
+</head>
+<body>
+
+<!-- Main Quiz Container -->
+<div class="main-container">
+  <h1>Space Quiz Adventure</h1>
+  <h3 id="question">Loading question...</h3>
+
+  <!-- Choices Buttons -->
+  <div class="choices-container" id="choices"></div>
+
+  <!-- Score Display -->
+  <div class="score" id="score">Score: 0</div>
+
+  <!-- Rocket Animation -->
+  <div class="rocket-wrapper">
+    <dotlottie-wc
+      id="rocket"
+      src="https://lottie.host/209c3f5b-b1eb-4506-a3bd-0be3b7cbb35d/yrMhSr63zZ.lottie"
+      style="width: 150px; height: 150px; position: relative;"
+      autoplay
+      loop
+    ></dotlottie-wc>
+  </div>
+</div>
+
+<!-- JS Script -->
+<script src="script.js"></script>
+</body>
+</html>

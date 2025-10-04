@@ -1,0 +1,76 @@
+/* Body styling with background image */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url('background.png'); /* Replace with your background image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Main quiz container with semi-transparent background */
+.main-container {
+  text-align: center;
+  background-color: rgba(0,0,0,0.5); /* semi-transparent to make text readable */
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+h1, h3 {
+  margin: 10px 0;
+}
+
+/* Choices container styling */
+.choices-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+/* Choice buttons styling */
+.choice-btn {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none; /* No border */
+  cursor: pointer;
+  background-color: rgba(255, 111, 97, 0.8); /* semi-transparent button */
+  color: white;
+  transition: 0.3s;
+}
+
+.choice-btn:hover {
+  background-color: rgba(255, 153, 140, 0.8);
+}
+
+/* Score display styling */
+.score {
+  font-size: 18px;
+}
+
+/* Rocket wrapper */
+.rocket-wrapper {
+  position: relative;
+  height: 200px;
+  margin-top: 20px;
+}
+
+/* Rocket move animation */
+.rocket-move {
+  animation: rocketUp 1s forwards;
+}
+
+/* Keyframes for rocket flying up */
+@keyframes rocketUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-200px); }
+}

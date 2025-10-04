@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<title>photographer</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../../turn.min.js"></script>
+<style type="text/css">
+body {
+    background: #faeded url('pages/books_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#magazine{
+    width:1060px;
+    height:500px;
+    position: absolute;
+    top: 100px;
+    left: 50px;
+}
+#magazine .turn-page{
+    background-color:#ccc;
+    background-size:100% 100%;
+    position: relative;
+}
+.page-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.play-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background 0.2s;
+}
+.play-btn:hover {
+    background: #e0e0e0;
+}
+#bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    object-fit: cover;
+}
+</style>
+</head>
+<body>
+
+
+<div id="magazine">
+    <div>
+        <div class="page-content" data-page="1">
+            <img src="pages/cover.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="1">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="2">
+            <img src="pages/1.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="2">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="3">
+            <img src="pages/2.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="3">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="4">
+            <img src="pages/3.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="4">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="5">
+            <img src="pages/4.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="5">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="6">
+            <img src="pages/5.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+	<div>
+        <div class="page-content" data-page="7">
+            <img src="pages/6.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="7">
+            <img src="pages/7.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="7">
+            <img src="pages/8.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="7">
+            <img src="pages/9.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="7">
+            <img src="pages/10.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="7">
+            <img src="pages/11.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+    <div>
+        <div class="page-content" data-page="7">
+            <img src="pages/12.jpg" style="width:100%;height:100%;">
+            <button class="play-btn" data-page="6">&#9658;</button>
+        </div>
+    </div>
+</div>
+
+<audio id="page-audio"></audio>
+<audio id="flip-sound" src="sounds/flib_sound.mp3"></audio>
+
+<script type="text/javascript">
+const pageSounds = {
+    1: 'sounds/cat.mp3',
+    2: 'sounds/dog.mp3',
+    3: 'sounds/fish.mp3',
+    4: 'sounds/cat.mp3',
+    5: 'sounds/dog.mp3',
+    6: 'sounds/fish.mp3',
+	7: 'sounds/fish.mp3',
+    8: 'sounds/fish.mp3',
+    9: 'sounds/fish.mp3',
+    10: 'sounds/fish.mp3',
+    11: 'sounds/fish.mp3',
+    12: 'sounds/fish.mp3',
+};
+
+let audioQueue = [];
+let isPlaying = false;
+
+// Helper: Add to queue if not already queued
+function queueAudio(page) {
+    if (!audioQueue.includes(page)) {
+        audioQueue.push(page);
+    }
+}
+
+// Helper: Play next in queue
+function playNextAudio() {
+    if (audioQueue.length === 0) {
+        isPlaying = false;
+        return;
+    }
+    const nextPage = audioQueue[0];
+    const audio = document.getElementById('page-audio');
+    audio.src = pageSounds[nextPage];
+    audio.currentTime = 0;
+    isPlaying = true;
+    audio.play();
+}
+
+// Play button click handler
+$(document).on('click', '.play-btn', function(e) {
+    const page = parseInt($(this).data('page'));
+
+    // Remove this page if already in the queue, then add to the end
+    audioQueue = audioQueue.filter(p => p !== page);
+    audioQueue.push(page);
+
+    // If nothing is playing, start playing this audio
+    if (!isPlaying) {
+        playNextAudio();
+    } else {
+        // If something is playing, stop it and play this one next
+        const audio = document.getElementById('page-audio');
+        audio.pause();
+        audio.currentTime = 0;
+        playNextAudio();
+    }
+});
+
+// When audio ends, play next in queue (if any)
+document.getElementById('page-audio').addEventListener('ended', function() {
+    // Remove the finished page from the queue
+    audioQueue.shift();
+    playNextAudio();
+});
+
+// If user flips page, play flip sound only (no auto audio)
+$('#magazine').turn({
+    display: 'double',
+    acceleration: true,
+    gradients: !$.isTouch,
+    elevation:50,
+    when: {
+        turning: function(e, page) {
+            const flipAudio = document.getElementById('flip-sound');
+            flipAudio.currentTime = 0;
+            flipAudio.play();
+        }
+    }
+});
+
+$(window).bind('keydown', function(e){
+    if (e.keyCode==37)
+        $('#magazine').turn('previous');
+    else if (e.keyCode==39)
+        $('#magazine').turn('next');
+});
+</script>
+</body>
+</html>
